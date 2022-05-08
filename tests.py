@@ -1,5 +1,4 @@
 from app import client
-from models import Video
 
 
 def test_simple():
@@ -9,34 +8,25 @@ def test_simple():
 
 
 def test_get():
-    res = client.get('/tutorials')
+    res = client.get('/message')
 
     assert res.status_code == 200
 
-    assert len(res.get_json()) == len(Video.query.all())
+    assert len(res.get_json()) == 2
     assert res.get_json()[0]['id'] == 1
 
 
 def test_post():
     data = {
-        'name': 'Unit Tests',
-        'description': 'Pytest tutorial'
+        'id': 3,
+        'title': 'Unit Tests',
+        'text': 'Pytest message'
     }
 
-    res = client.post('/tutorials', json=data)
+    res = client.post('/message', json=data)
 
     assert res.status_code == 200
 
+    assert len(res.get_json()) == 3
+    assert res.get_json()[-1]['text'] == data['text']
 
-def test_put():
-    res = client.put('/tutorials/1', json={'name': 'UPD'})
-
-    assert res.status_code == 200
-    assert Video.query.get(1).name == 'UPD'
-
-
-def test_delete():
-    res = client.delete('/tutorials/1')
-
-    assert res.status_code == 204
-    assert Video.query.get(1) is None
