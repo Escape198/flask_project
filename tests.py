@@ -1,10 +1,5 @@
 from app import client
-
-
-def test_simple():
-    mylist = [1, 2, 3, 4, 5]
-
-    assert 1 in mylist
+from models import Message
 
 
 def test_get():
@@ -12,21 +7,30 @@ def test_get():
 
     assert res.status_code == 200
 
-    assert len(res.get_json()) == 2
-    assert res.get_json()[0]['id'] == 1
+    assert len(res.get_json()) == len(Message.query.all())
+    #assert res.get_json()[0]['id'] == 1
 
 
 def test_post():
     data = {
-        'id': 3,
-        'title': 'Unit Tests',
-        'text': 'Pytest message'
+        'messages': 'Unit Tests',
     }
 
     res = client.post('/message', json=data)
 
     assert res.status_code == 200
 
-    assert len(res.get_json()) == 3
-    assert res.get_json()[-1]['text'] == data['text']
+'''
+def test_put():
+    res = client.put('/message/1', json={'message': 'UPD'})
 
+    assert res.status_code == 200
+    assert Message.query.get(1).message == 'UPD'
+
+
+def test_delete():
+    res = client.delete('/message/1')
+
+    assert res.status_code == 204
+    assert Message.query.get(1) is None
+'''
