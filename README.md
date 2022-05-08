@@ -19,8 +19,8 @@
       New user registration.
 >      
 >       Parameters:                         Response:
->       name     | String                   success      | String      
->       email    | String                   access_token | String
+>       name     | String                   success | String    
+>       email    | String                   
 >       password |       
 >      
 >      {'name': 'juice', 'email': 'test@test.com', 'password': 'test'}
