@@ -1,31 +1,14 @@
 from flask import Flask, jsonify, request
-import sqlalchemy as db
-from sqlalchemy.orm import sessionmaker, scoped_session
-from sqlalchemy import create_engine
-from sqlalchemy.ext.declarative import declarative_base
 
 app = Flask(__name__)
 
 client = app.test_client()
 
-engine = create_engine('sqlite:///db.sqlite')
 
-session = scoped_session(sessionmaker(
-    autocommit=False, autoflush=False, bind=engine))
-
-Base = declarative_base()
-Base.query = session.query_property()
-
-from models import *
-
-Base.metadata.create_all(bind=engine)
-
-
-tutorials = [
+message = [
     {
         'id': 1,
-        'title': 'Video #1. Intro',
-        'description': 'GET, POST routes'
+        'text': 'Intro',
     },
     {
         'id': 2,
@@ -35,63 +18,37 @@ tutorials = [
 ]
 
 
-@app.route('/tutorials', methods=['GET'])
+@app.route('/message', methods=['GET'])
 def get_list():
-    videos = Video.query.all()
-    serialized = []
-    for video in videos:
-        serialized.append({
-            'id': video.id,
-            'name': video.name,
-            'description': video.description
-        })
-    return jsonify(serialized)
+    return jsonify(message)
 
 
-@app.route('/tutorials', methods=['POST'])
+@app.route('/message', methods=['POST'])
 def update_list():
-    new_one = Video(**request.json)
-    session.add(new_one)
-    session.commit()
-    serialized = {
-        'id': new_one.id,
-        'name': new_one.name,
-        'description': new_one.description
-    }
-    return jsonify(serialized)
+    new_one = request.json
+    message.append(new_one)
+    return jsonify(message)
 
 
-@app.route('/tutorials/<int:tutorial_id>', methods=['PUT'])
-def update_tutorial(tutorial_id):
-    item = Video.query.filter(Video.id == tutorial_id).first()
+@app.route('/tutorials/<int:message_id>', methods=['PUT'])
+def update_tutorial(message_id):
+    item = next((x for x in message if x['id'] == message_id), None)
     params = request.json
     if not item:
-        return {'message': 'No tutorials with this id'}, 400
-    for key, value in params.items():
-        setattr(item, key, value)
-    session.commit()
-    serialized = {
-        'id': item.id,
-        'name': item.name,
-        'description': item.description
-    }
-    return serialized
+        return {'message': 'No message with this id'}, 400
+    item.update(params)
+    return item
 
 
-@app.route('/tutorials/<int:tutorial_id>', methods=['DELETE'])
-def delete_tutorial(tutorial_id):
-    item = Video.query.filter(Video.id == tutorial_id).first()
-    if not item:
-        return {'message': 'No tutorials with this id'}, 400
-    session.delete(item)
-    session.commit()
+@app.route('/tutorials/<int:message_id>', methods=['DELETE'])
+def delete_tutorial(message_id):
+    idx, _ = next((x for x in enumerate(message)
+                   if x[1]['id'] == message_id), (None, None))
+
+    message.pop(idx)
     return '', 204
-
-
-@app.teardown_appcontext
-def shutdown_session(exception=None):
-    session.remove()
 
 
 if __name__ == '__main__':
     app.run()
+
