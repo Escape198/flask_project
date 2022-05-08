@@ -30,8 +30,8 @@ def update_list():
     return jsonify(message)
 
 
-@app.route('/tutorials/<int:message_id>', methods=['PUT'])
-def update_tutorial(message_id):
+@app.route('/message/<int:message_id>', methods=['PUT'])
+def update_message(message_id):
     item = next((x for x in message if x['id'] == message_id), None)
     params = request.json
     if not item:
@@ -40,8 +40,8 @@ def update_tutorial(message_id):
     return item
 
 
-@app.route('/tutorials/<int:message_id>', methods=['DELETE'])
-def delete_tutorial(message_id):
+@app.route('/message/<int:message_id>', methods=['DELETE'])
+def delete_message(message_id):
     idx, _ = next((x for x in enumerate(message)
                    if x[1]['id'] == message_id), (None, None))
 
