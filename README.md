@@ -31,12 +31,24 @@
 >      
 >       Parameters:                         Response:
 >       message  | String(500)              id | Integer
->                                           messages | String
+>       'Authorization': 'Bearer {}         messages | String
 >                                           status   | String (review, blocked, correct)
->                                           success  | String
+>                                           success  | String (Check text status)
 >                                           user_id  | Integer                    
 >      
 >      {'messages': 'АБРАКАДАБРА'}
-          
+----
+
+-      /api/v1/message || GET
+      Get a list of all your messages
+>      
+>       Parameters:                         Response:
+>       'Authorization': 'Bearer {}         id | Integer
+>                                           messages | String
+>                                           status   | String (review, blocked, correct)
+>                                           success  | String (Check text status)
+>                                           user_id  | Integer                    
+>      
+>        
 ***
    
