@@ -1,8 +1,14 @@
-## ...
+## REST API Flask, SQLAlchemy.
 
+Authentication: **JWTManager**
+
+Testing: **PyTest**
+
+Serialization/Deserialization: **Marshmallow**
+
+Exception handling and logging
 ***
 ## Tools:
-
 ***
 ## API
 -     /auth || POST
