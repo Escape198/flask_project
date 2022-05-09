@@ -13,6 +13,25 @@ The service saves the message in the database (think of the table(s) yourself) w
 
 API service changes the status of the message. If the message is correct, it is set to "correct", otherwise it is set to "blocked".
 ***
+Create a virtual environment
+>python -m venv env
+
+
+Activate the venv
+>env\scripts\activate.bat
+
+
+Open the project folder
+>cd project
+
+
+Install all modules
+>pip install -r requirements.txt
+
+
+Starting the server
+>python manage.py
+***
 ## API
 -     /auth || POST
       Exchanging user login and password to JWT authorization token.
