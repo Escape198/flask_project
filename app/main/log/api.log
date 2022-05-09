@@ -1,0 +1,41 @@
+2022-05-09 21:06:45,830:main:ERROR:Exception on /api/v1/message [POST]
+Traceback (most recent call last):
+  File "C:\Users\recur\Desktop\project\env\lib\site-packages\flask\app.py", line 2077, in wsgi_app
+    response = self.full_dispatch_request()
+  File "C:\Users\recur\Desktop\project\env\lib\site-packages\flask\app.py", line 1525, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "C:\Users\recur\Desktop\project\env\lib\site-packages\flask\app.py", line 1523, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "C:\Users\recur\Desktop\project\env\lib\site-packages\flask\app.py", line 1509, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**req.view_args)
+  File "C:\Users\recur\Desktop\project\env\lib\site-packages\flask_jwt_extended\view_decorators.py", line 153, in decorator
+    verify_jwt_in_request(optional, fresh, refresh, locations, verify_type)
+  File "C:\Users\recur\Desktop\project\env\lib\site-packages\flask_jwt_extended\view_decorators.py", line 89, in verify_jwt_in_request
+    jwt_data, jwt_header, jwt_location = _decode_jwt_from_request(
+  File "C:\Users\recur\Desktop\project\env\lib\site-packages\flask_jwt_extended\view_decorators.py", line 323, in _decode_jwt_from_request
+    decoded_token = decode_token(encoded_token, csrf_token)
+  File "C:\Users\recur\Desktop\project\env\lib\site-packages\flask_jwt_extended\utils.py", line 127, in decode_token
+    return jwt_manager._decode_jwt_from_config(encoded_token, csrf_value, allow_expired)
+  File "C:\Users\recur\Desktop\project\env\lib\site-packages\flask_jwt_extended\jwt_manager.py", line 526, in _decode_jwt_from_config
+    secret = self._decode_key_callback(unverified_headers, unverified_claims)
+  File "C:\Users\recur\Desktop\project\env\lib\site-packages\flask_jwt_extended\default_callbacks.py", line 153, in default_decode_key_callback
+    return config.decode_key
+  File "C:\Users\recur\Desktop\project\env\lib\site-packages\flask_jwt_extended\config.py", line 39, in decode_key
+    return self._public_key if self.is_asymmetric else self._secret_key
+  File "C:\Users\recur\Desktop\project\env\lib\site-packages\flask_jwt_extended\config.py", line 237, in _secret_key
+    raise RuntimeError(
+RuntimeError: JWT_SECRET_KEY or flask SECRET_KEY must be set when using symmetric algorithm "HS256"
+2022-05-09 21:10:41,638:main:WARNING:registration failed with errors: bcrypt: no backends available -- recommend you install one (e.g. 'pip install bcrypt')
+2022-05-09 21:24:48,751:main:ERROR:Exception on / [GET]
+Traceback (most recent call last):
+  File "C:\Users\recur\Desktop\project\env\lib\site-packages\flask\app.py", line 2077, in wsgi_app
+    response = self.full_dispatch_request()
+  File "C:\Users\recur\Desktop\project\env\lib\site-packages\flask\app.py", line 1525, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "C:\Users\recur\Desktop\project\env\lib\site-packages\flask\app.py", line 1523, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "C:\Users\recur\Desktop\project\env\lib\site-packages\flask\app.py", line 1509, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**req.view_args)
+  File "C:\Users\recur\Desktop\project\app\main\main\views.py", line 27, in home
+    return render_template("home.html")
+NameError: name 'render_template' is not defined
