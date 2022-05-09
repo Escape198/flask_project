@@ -8,7 +8,10 @@ Serialization/Deserialization: **Marshmallow**
 
 Exception handling and logging
 ***
-## Tools:
+Client sends a message to API service.
+The service saves the message in the database (think of the table(s) yourself) with the status "in review". In the database the message can be in three states: checked, blocked, correct.
+
+API service changes the status of the message. If the message is correct, it is set to "correct", otherwise it is set to "blocked".
 ***
 ## API
 -     /auth || POST
