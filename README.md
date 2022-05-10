@@ -32,7 +32,7 @@ Install all modules
 Starting the server
 >python manage.py
 ***
-## API
+## API 🍪
 -     /auth || POST
       Exchanging user login and password to JWT authorization token.
 >      
