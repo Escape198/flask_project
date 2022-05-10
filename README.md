@@ -5,7 +5,7 @@ Authentication: **JWTManager**
 Testing: **PyTest**
 
 Serialization/Deserialization: **Marshmallow**
-
+5
 Exception handling and logging
 ***
 ## Task description 🍪
