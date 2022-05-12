@@ -1,5 +1,5 @@
 ## REST API Flask, SQLAlchemy. 🍪
-d
+
 Authentication: **JWTManager**
 
 Testing: **PyTest**
