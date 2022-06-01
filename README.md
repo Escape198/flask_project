@@ -1,3 +1,4 @@
+
 ## REST API Flask, SQLAlchemy. 🍪
 
 Authentication: **JWTManager**
